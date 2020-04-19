@@ -70,20 +70,41 @@ class BinaryTree:
                     ] + shifted_lines, n + u, p + 2, u // 2
 
         # Two children.
-        left, n, p, x = self.leftChild._display_aux()
-        right, m, q, y = self.rightChild._display_aux()
-        s = '%s' % self.key
-        u = len(s)
-        first_line = (x + 1) * ' ' + (
-            n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
-        second_line = x * ' ' + '/' + (
-            n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
+        resultl = self.leftChild._display_aux()
+        print("resultl", resultl)
+        left, nnn, ppp, xxx = resultl[0], resultl[1], resultl[2], resultl[3]
 
-        if p < q:
-            left += [n * ' '] * (q - p)
-        elif q < p:
-            right += [m * ' '] * (p - q)
+        print("left", left)
+
+        resultr = self.rightChild._display_aux()
+        print("resultr", resultr)
+
+        right, mmm, qqq, yyy = resultr[0], resultr[1], resultr[2], resultr[3]
+
+        print("right", right)
+
+        sss = '%s' % self.key
+        uuu = len(sss)
+
+        first_line = (xxx + 1) * ' ' + (
+            nnn - xxx - 1) * '_' + sss + yyy * '_' + (mmm - yyy) * ' '
+
+        second_line = xxx * ' ' + '/' + (
+            nnn - xxx - 1 + uuu + yyy) * ' ' + '\\' + (mmm - yyy - 1) * ' '
+
+        if ppp < qqq:
+            left += [nnn * ' '] * (qqq - ppp)
+        elif qqq < ppp:
+            right += [mmm * ' '] * (ppp - qqq)
+
         zipped_lines = zip(left, right)
         lines = [first_line, second_line] + [
-            a + u * ' ' + b for a, b in zipped_lines]
-        return lines, n + m + u, max(p, q) + 2, n + u // 2
+            aaa + uuu * ' ' + bbb for aaa, bbb in zipped_lines]
+        return lines, nnn + mmm + uuu, max(ppp, qqq) + 2, nnn + uuu // 2
+
+
+def createTree():
+    tree = BinaryTree(1)
+    tree.insertLeft(2)
+    tree.insertRight(3)
+    return tree
